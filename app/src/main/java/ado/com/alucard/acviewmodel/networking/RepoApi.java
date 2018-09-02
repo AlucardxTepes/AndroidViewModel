@@ -10,7 +10,7 @@ public class RepoApi {
   private static Retrofit retrofit;
   private static RepoService repoService;
 
-  private static RepoService getInstance() {
+  public static RepoService getInstance() {
     if (repoService != null) {
       return repoService;
     }
