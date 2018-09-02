@@ -1,5 +1,6 @@
 package ado.com.alucard.acviewmodel.details;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ado.com.alucard.acviewmodel.R;
+import ado.com.alucard.acviewmodel.home.SelectedRepoViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -35,7 +37,13 @@ public class DetailsFragment extends Fragment {
   }
 
   private void displayRepo() {
-
+    SelectedRepoViewModel selectedRepoViewModel = ViewModelProviders.of(getActivity()).get(SelectedRepoViewModel.class);
+    selectedRepoViewModel.getSelectedRepo().observe(this, repo -> {
+      repoNameTextView.setText(repo.name);
+      repoDescriptionTextView.setText(repo.description);
+      forksTextView.setText(String.valueOf(repo.forks));
+      starsTextView.setText(String.valueOf(repo.stars));
+    });
   }
 
   @Override
