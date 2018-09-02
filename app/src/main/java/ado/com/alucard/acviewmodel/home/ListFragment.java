@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,10 @@ public class ListFragment extends Fragment {
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     viewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+
+    listView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+    listView.setAdapter(new RepoListAdapter(viewModel, this));
+    listView.setLayoutManager(new LinearLayoutManager(getContext()));
     observeViewModel();
   }
 
