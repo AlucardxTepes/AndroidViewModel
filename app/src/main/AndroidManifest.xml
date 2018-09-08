@@ -3,8 +3,9 @@
   package="ado.com.alucard.acviewmodel">
 
   <uses-permission android:name="android.permission.INTERNET" />
-  
+
   <application
+    android:name=".base.MyApplication"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
