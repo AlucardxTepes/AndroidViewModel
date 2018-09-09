@@ -11,10 +11,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import javax.inject.Inject;
+
 public class SelectedRepoViewModel extends ViewModel {
 
   private final MutableLiveData<Repo> selectedRepo = new MutableLiveData<>();
   private Call<Repo> repoCall;
+
+  @Inject
+  public SelectedRepoViewModel() {
+  }
 
   public MutableLiveData<Repo> getSelectedRepo() {
     return selectedRepo;

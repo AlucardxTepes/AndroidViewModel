@@ -1,17 +1,17 @@
 package ado.com.alucard.acviewmodel.home;
 
+import ado.com.alucard.acviewmodel.model.Repo;
+import ado.com.alucard.acviewmodel.networking.RepoApi;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
-
-import java.util.List;
-
-import ado.com.alucard.acviewmodel.model.Repo;
-import ado.com.alucard.acviewmodel.networking.RepoApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class ListViewModel extends ViewModel {
 
@@ -20,6 +20,7 @@ public class ListViewModel extends ViewModel {
   private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
   private Call<List<Repo>> repoCall;
 
+  @Inject
   public ListViewModel() {
     fetchRepos();
   }

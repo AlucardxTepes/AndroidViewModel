@@ -1,0 +1,17 @@
+package ado.com.alucard.acviewmodel.viewmodel;
+
+import android.arch.lifecycle.ViewModel;
+import dagger.MapKey;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@MapKey
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ViewModelKey {
+
+  Class<? extends ViewModel> value();
+}
