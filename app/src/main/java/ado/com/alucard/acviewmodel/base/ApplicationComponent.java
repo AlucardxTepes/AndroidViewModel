@@ -11,5 +11,5 @@ import javax.inject.Singleton;
     NetworkModule.class,
     ViewModelModule.class
 })
-public abstract class ApplicationComponent {
+public interface ApplicationComponent {
 }
