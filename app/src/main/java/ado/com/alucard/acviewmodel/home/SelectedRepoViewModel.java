@@ -1,12 +1,11 @@
 package ado.com.alucard.acviewmodel.home;
 
+import ado.com.alucard.acviewmodel.model.Repo;
+import ado.com.alucard.acviewmodel.networking.RepoService;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.Bundle;
 import android.util.Log;
-
-import ado.com.alucard.acviewmodel.model.Repo;
-import ado.com.alucard.acviewmodel.networking.RepoApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,9 +16,11 @@ public class SelectedRepoViewModel extends ViewModel {
 
   private final MutableLiveData<Repo> selectedRepo = new MutableLiveData<>();
   private Call<Repo> repoCall;
+  private RepoService repoService;
 
   @Inject
-  public SelectedRepoViewModel() {
+  public SelectedRepoViewModel(RepoService repoService) {
+    this.repoService = repoService;
   }
 
   public MutableLiveData<Repo> getSelectedRepo() {
@@ -49,7 +50,7 @@ public class SelectedRepoViewModel extends ViewModel {
   }
 
   private void loadRepo(String[] repoDetails) {
-    repoCall = RepoApi.getInstance().getRepo(repoDetails[0], repoDetails[1]);
+    repoCall = repoService.getRepo(repoDetails[0], repoDetails[1]);
     repoCall.enqueue(new Callback<Repo>() {
       @Override
       public void onResponse(Call<Repo> call, Response<Repo> response) {

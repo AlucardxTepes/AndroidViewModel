@@ -1,7 +1,7 @@
 package ado.com.alucard.acviewmodel.home;
 
 import ado.com.alucard.acviewmodel.model.Repo;
-import ado.com.alucard.acviewmodel.networking.RepoApi;
+import ado.com.alucard.acviewmodel.networking.RepoService;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
@@ -19,27 +19,29 @@ public class ListViewModel extends ViewModel {
   private final MutableLiveData<Boolean> repoLoadError = new MutableLiveData<>();
   private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
   private Call<List<Repo>> repoCall;
+  private RepoService repoService;
 
   @Inject
-  public ListViewModel() {
+  public ListViewModel(RepoService repoService) {
+    this.repoService = repoService;
     fetchRepos();
   }
 
-  public LiveData<List<Repo>> getRepos() {
+  LiveData<List<Repo>> getRepos() {
     return repos;
   }
 
-  public LiveData<Boolean> getRepoLoadError() {
+  LiveData<Boolean> getRepoLoadError() {
     return repoLoadError;
   }
 
-  public LiveData<Boolean> getLoading() {
+  LiveData<Boolean> getLoading() {
     return loading;
   }
 
   private void fetchRepos() {
     loading.setValue(true);
-    repoCall = RepoApi.getInstance().getRepositories();
+    repoCall = repoService.getRepositories();
     repoCall.enqueue(new Callback<List<Repo>>() {
       @Override
       public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
